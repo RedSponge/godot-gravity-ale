@@ -1,0 +1,23 @@
+{
+	"game_over": {
+		"initial_text": "Press the screen to Try Again!",
+		"texts": [
+			{
+				"text": "This is a second line of text",
+				"offset": 5
+			},
+			{
+				"text": "I programmed this feature and I'm gonna use it",
+				"offset": 6
+			},
+			{
+				"text": "Yup",
+				"offset": 7
+			}
+		]
+	},
+	"opening": {
+		"start_selecting": "Press the screen to charge up your gun",
+		"select_asteroid": "Select your target, and release!"
+	}
+}

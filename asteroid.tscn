@@ -1,0 +1,30 @@
+[gd_scene load_steps=5 format=3 uid="uid://cbio6stuj6uj2"]
+
+[ext_resource type="Texture2D" uid="uid://btf7i0h6lgx56" path="res://assets/textures/asteroid.png" id="1_2x6g1"]
+[ext_resource type="Script" path="res://asteroid.gd" id="1_jec3p"]
+[ext_resource type="Script" path="res://rotate.gd" id="2_73i1s"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_qduhu"]
+radius = 8.0
+
+[node name="Asteroid" type="Node2D" groups=["targetable"]]
+script = ExtResource("1_jec3p")
+
+[node name="Texture" type="Sprite2D" parent="."]
+texture_filter = 1
+scale = Vector2(1.25, 1.25)
+texture = ExtResource("1_2x6g1")
+script = ExtResource("2_73i1s")
+metadata/_edit_lock_ = true
+
+[node name="Area2D" type="Area2D" parent="."]
+metadata/_edit_lock_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_qduhu")
+metadata/_edit_lock_ = true
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+metadata/_edit_lock_ = true
+
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]

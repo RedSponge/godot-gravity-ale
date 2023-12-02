@@ -1,0 +1,16 @@
+[remap]
+
+importer="font_data_bmfont"
+type="FontFile"
+uid="uid://crobd4cvcscdg"
+path="res://.godot/imported/futile.fnt-d1d39b5a1be15bd462656ea94fdc42f3.fontdata"
+
+[deps]
+
+source_file="res://assets/futile.fnt"
+dest_files=["res://.godot/imported/futile.fnt-d1d39b5a1be15bd462656ea94fdc42f3.fontdata"]
+
+[params]
+
+fallbacks=[]
+compress=true

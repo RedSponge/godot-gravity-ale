@@ -1,0 +1,19 @@
+{
+	"game_over": {
+		"initial_text": "Press the Key of the Background to Try Again!",
+		"texts": [
+			{
+				"text": "(That means [Space])",
+				"offset": 5
+			},
+			{
+				"text": "Also press Q to Go Back to Menu!",
+				"offset": 7
+			}
+		]
+	},
+	"opening": {
+		"start_selecting": "Hold X to charge up your gun",
+		"select_asteroid": "Use arrows to choose your target, and release!"
+	}
+}

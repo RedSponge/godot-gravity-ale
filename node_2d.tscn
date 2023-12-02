@@ -1,0 +1,63 @@
+[gd_scene load_steps=9 format=3 uid="uid://dxv3fsdyj8to7"]
+
+[ext_resource type="Texture2D" uid="uid://d3xscqsvhvcy7" path="res://assets/textures/space.png" id="1_y5yp8"]
+[ext_resource type="Script" path="res://detect_collisions.gd" id="2_fbrbs"]
+[ext_resource type="Script" path="res://Move.gd" id="3_flkp1"]
+[ext_resource type="Texture2D" uid="uid://jq830u4qefwr" path="res://assets/textures/beer_idle_1.png" id="3_r1t2a"]
+[ext_resource type="Texture2D" uid="uid://btf7i0h6lgx56" path="res://assets/textures/asteroid.png" id="4_q6y4q"]
+[ext_resource type="Script" path="res://rotate.gd" id="6_ogqdm"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_v1wjl"]
+size = Vector2(12.5, 23)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_f3n2n"]
+radius = 8.0
+
+[node name="Main" type="Node2D"]
+
+[node name="Space" type="Sprite2D" parent="."]
+scale = Vector2(2, 2)
+texture = ExtResource("1_y5yp8")
+metadata/_edit_lock_ = true
+
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(2, 2)
+metadata/_edit_lock_ = true
+
+[node name="Player" type="Node2D" parent="."]
+script = ExtResource("2_fbrbs")
+
+[node name="Texture" type="Sprite2D" parent="Player"]
+texture = ExtResource("3_r1t2a")
+metadata/_edit_lock_ = true
+
+[node name="Area2D" type="Area2D" parent="Player"]
+metadata/_edit_lock_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player/Area2D"]
+position = Vector2(3, -2)
+shape = SubResource("RectangleShape2D_v1wjl")
+metadata/_edit_lock_ = true
+
+[node name="World" type="Sprite2D" parent="."]
+position = Vector2(125, -177)
+
+[node name="Asteroid" type="Node2D" parent="."]
+position = Vector2(178, 0)
+script = ExtResource("3_flkp1")
+
+[node name="Texture" type="Sprite2D" parent="Asteroid"]
+texture = ExtResource("4_q6y4q")
+script = ExtResource("6_ogqdm")
+metadata/_edit_lock_ = true
+
+[node name="Area2D" type="Area2D" parent="Asteroid"]
+metadata/_edit_lock_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Asteroid/Area2D"]
+shape = SubResource("CircleShape2D_f3n2n")
+metadata/_edit_lock_ = true
+
+[connection signal="hit" from="Player" to="Player" method="_on_hit"]
+[connection signal="area_entered" from="Player/Area2D" to="Player" method="_on_area_2d_area_entered"]
+[connection signal="body_entered" from="Player/Area2D" to="Player" method="_on_area_2d_body_entered"]

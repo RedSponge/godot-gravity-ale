@@ -1,0 +1,130 @@
+[gd_scene load_steps=15 format=3 uid="uid://6mybs6uwa33k"]
+
+[ext_resource type="Script" path="res://spawn_asteroids.gd" id="1_gb4bc"]
+[ext_resource type="PackedScene" uid="uid://cbio6stuj6uj2" path="res://asteroid.tscn" id="2_8tjmr"]
+[ext_resource type="PackedScene" uid="uid://dsox8napsmt60" path="res://player.tscn" id="3_bj2n7"]
+[ext_resource type="Texture2D" uid="uid://d3xscqsvhvcy7" path="res://assets/textures/space.png" id="3_qktir"]
+[ext_resource type="Shader" path="res://passthrough.gdshader" id="5_6w6k0"]
+[ext_resource type="Script" path="res://remove_after_shoot.gd" id="5_p6kp0"]
+[ext_resource type="Script" path="res://ΑimVfxManager.gd" id="5_x8gfe"]
+[ext_resource type="Script" path="res://slow_motion_manager.gd" id="6_35w1t"]
+[ext_resource type="PackedScene" uid="uid://bbsdpe5v5kper" path="res://tutorial_asteroid.tscn" id="6_dpbd5"]
+[ext_resource type="Script" path="res://target_connector.gd" id="8_2o8hg"]
+[ext_resource type="PackedScene" uid="uid://odbwkyfixg6f" path="res://target.tscn" id="8_tm4f5"]
+[ext_resource type="PackedScene" uid="uid://bekwelnhie118" path="res://hud.tscn" id="12_olu14"]
+
+[sub_resource type="Curve2D" id="Curve2D_n6pob"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, -320, -192, 0, 0, 0, 0, 320, -192, 0, 0, 0, 0, 320, 192, 0, 0, 0, 0, -320, 192, 0, 0, 0, 0, -320, -192)
+}
+point_count = 5
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_b7h31"]
+resource_name = "game_screen"
+shader = ExtResource("5_6w6k0")
+shader_parameter/u_greyscale_percent = 0.0
+shader_parameter/u_barrel_power = 0.0
+shader_parameter/u_scatter_percent = 0.0
+
+[node name="Main" type="Node"]
+script = ExtResource("1_gb4bc")
+mob_scene = ExtResource("2_8tjmr")
+
+[node name="AsteroidPath" type="Path2D" parent="."]
+curve = SubResource("Curve2D_n6pob")
+
+[node name="AsteroidSpawnLocation" type="PathFollow2D" parent="AsteroidPath"]
+position = Vector2(-320, -192)
+
+[node name="Camera2D" type="Camera2D" parent="."]
+metadata/_edit_lock_ = true
+
+[node name="Logic" type="Node" parent="."]
+unique_name_in_owner = true
+
+[node name="AsteroidTimer" type="Timer" parent="Logic"]
+wait_time = 0.5
+
+[node name="ScoreTimer" type="Timer" parent="Logic"]
+
+[node name="StartTimer" type="Timer" parent="Logic"]
+wait_time = 2.0
+one_shot = true
+
+[node name="SlowMoManager" type="Node" parent="Logic"]
+script = ExtResource("6_35w1t")
+
+[node name="TargetConnector" type="Node" parent="Logic" node_paths=PackedStringArray("marker")]
+script = ExtResource("8_2o8hg")
+marker = NodePath("../../CanvasGroup/Target")
+
+[node name="ΑimVfxManager" type="Node" parent="Logic" node_paths=PackedStringArray("canvas_item")]
+script = ExtResource("5_x8gfe")
+canvas_item = NodePath("../../CanvasGroup")
+
+[node name="Markers" type="Node" parent="."]
+unique_name_in_owner = true
+
+[node name="StartPosition" type="Marker2D" parent="Markers"]
+
+[node name="CanvasGroup" type="CanvasGroup" parent="."]
+texture_filter = 2
+texture_repeat = 3
+material = SubResource("ShaderMaterial_b7h31")
+metadata/_edit_lock_ = true
+
+[node name="Background" type="Sprite2D" parent="CanvasGroup"]
+texture_filter = 1
+scale = Vector2(2, 2)
+texture = ExtResource("3_qktir")
+metadata/_edit_lock_ = true
+
+[node name="TestAseroids" type="Node2D" parent="CanvasGroup"]
+script = ExtResource("5_p6kp0")
+metadata/_edit_lock_ = true
+
+[node name="Asteroid1" parent="CanvasGroup/TestAseroids" instance=ExtResource("6_dpbd5")]
+position = Vector2(112, 0)
+metadata/_edit_lock_ = true
+
+[node name="Asteroid2" parent="CanvasGroup/TestAseroids" instance=ExtResource("6_dpbd5")]
+position = Vector2(64, 64)
+metadata/_edit_lock_ = true
+
+[node name="Asteroid3" parent="CanvasGroup/TestAseroids" instance=ExtResource("6_dpbd5")]
+position = Vector2(-64, 64)
+metadata/_edit_lock_ = true
+
+[node name="Asteroid4" parent="CanvasGroup/TestAseroids" instance=ExtResource("6_dpbd5")]
+position = Vector2(-120, 0)
+metadata/_edit_lock_ = true
+
+[node name="Asteroid5" parent="CanvasGroup/TestAseroids" instance=ExtResource("6_dpbd5")]
+position = Vector2(-64, -64)
+metadata/_edit_lock_ = true
+
+[node name="Asteroid6" parent="CanvasGroup/TestAseroids" instance=ExtResource("6_dpbd5")]
+position = Vector2(64, -64)
+metadata/_edit_lock_ = true
+
+[node name="Player" parent="CanvasGroup" instance=ExtResource("3_bj2n7")]
+metadata/_edit_lock_ = true
+
+[node name="Target" parent="CanvasGroup" instance=ExtResource("8_tm4f5")]
+visible = false
+metadata/_edit_lock_ = true
+
+[node name="HUD" parent="." instance=ExtResource("12_olu14")]
+visible = false
+
+[connection signal="timeout" from="Logic/AsteroidTimer" to="." method="_on_asteroid_timer_timeout"]
+[connection signal="timeout" from="Logic/ScoreTimer" to="." method="_on_score_timer_timeout"]
+[connection signal="timeout" from="Logic/StartTimer" to="." method="_on_start_timer_timeout"]
+[connection signal="choose_target" from="CanvasGroup/Player" to="Logic/TargetConnector" method="_on_player_choose_target"]
+[connection signal="hit" from="CanvasGroup/Player" to="." method="game_over"]
+[connection signal="shoot" from="CanvasGroup/Player" to="." method="_on_player_shoot"]
+[connection signal="shoot" from="CanvasGroup/Player" to="Logic/SlowMoManager" method="_on_player_shoot"]
+[connection signal="shoot" from="CanvasGroup/Player" to="Logic/ΑimVfxManager" method="_on_player_shoot"]
+[connection signal="shoot" from="CanvasGroup/Player" to="CanvasGroup/TestAseroids" method="_on_player_shoot"]
+[connection signal="start_aim" from="CanvasGroup/Player" to="Logic/SlowMoManager" method="_on_player_start_aim"]
+[connection signal="start_aim" from="CanvasGroup/Player" to="Logic/ΑimVfxManager" method="_on_player_start_aim"]

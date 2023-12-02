@@ -1,0 +1,160 @@
+
+world.png
+size: 1024, 256
+format: RGBA8888
+filter: Nearest, Nearest
+repeat: none
+astroid
+  rotate: false
+  xy: 662, 177
+  size: 22, 20
+  orig: 22, 20
+  offset: 0, 0
+  index: -1
+beer_aim
+  rotate: false
+  xy: 389, 140
+  size: 23, 28
+  orig: 23, 28
+  offset: 0, 0
+  index: 1
+beer_aim
+  rotate: false
+  xy: 111, 18
+  size: 23, 28
+  orig: 23, 28
+  offset: 0, 0
+  index: 2
+beer_aim
+  rotate: false
+  xy: 414, 140
+  size: 23, 28
+  orig: 23, 28
+  offset: 0, 0
+  index: 3
+beer_aim
+  rotate: false
+  xy: 136, 18
+  size: 23, 28
+  orig: 23, 28
+  offset: 0, 0
+  index: 4
+beer_flying
+  rotate: false
+  xy: 662, 199
+  size: 29, 29
+  orig: 29, 29
+  offset: 0, 0
+  index: 1
+beer_flying
+  rotate: false
+  xy: 2, 17
+  size: 29, 29
+  orig: 29, 29
+  offset: 0, 0
+  index: 2
+beer_flying
+  rotate: false
+  xy: 324, 105
+  size: 29, 29
+  orig: 29, 29
+  offset: 0, 0
+  index: 3
+beer_flying
+  rotate: false
+  xy: 358, 139
+  size: 29, 29
+  orig: 29, 29
+  offset: 0, 0
+  index: 4
+beer_idle
+  rotate: false
+  xy: 324, 73
+  size: 24, 30
+  orig: 24, 30
+  offset: 0, 0
+  index: 1
+beer_idle
+  rotate: false
+  xy: 33, 16
+  size: 24, 30
+  orig: 24, 30
+  offset: 0, 0
+  index: 2
+beer_idle
+  rotate: false
+  xy: 59, 16
+  size: 24, 30
+  orig: 24, 30
+  offset: 0, 0
+  index: 3
+beer_idle
+  rotate: false
+  xy: 85, 16
+  size: 24, 30
+  orig: 24, 30
+  offset: 0, 0
+  index: 4
+gravity_gun
+  rotate: false
+  xy: 708, 231
+  size: 21, 13
+  orig: 21, 13
+  offset: 0, 0
+  index: 1
+gravity_gun
+  rotate: false
+  xy: 181, 49
+  size: 21, 13
+  orig: 21, 13
+  offset: 0, 0
+  index: 2
+gravity_gun
+  rotate: false
+  xy: 2, 2
+  size: 21, 13
+  orig: 21, 13
+  offset: 0, 0
+  index: 3
+sonic_ring
+  rotate: false
+  xy: 693, 209
+  size: 10, 19
+  orig: 10, 19
+  offset: 0, 0
+  index: -1
+space
+  rotate: false
+  xy: 2, 64
+  size: 320, 180
+  orig: 320, 180
+  offset: 0, 0
+  index: -1
+start_text
+  rotate: false
+  xy: 2, 48
+  size: 177, 14
+  orig: 177, 14
+  offset: 0, 0
+  index: -1
+subtitle
+  rotate: false
+  xy: 324, 230
+  size: 382, 14
+  orig: 382, 14
+  offset: 0, 0
+  index: -1
+target
+  rotate: false
+  xy: 324, 136
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+title
+  rotate: false
+  xy: 324, 170
+  size: 336, 58
+  orig: 336, 58
+  offset: 0, 0
+  index: -1

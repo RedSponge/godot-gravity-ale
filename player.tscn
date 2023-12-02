@@ -1,0 +1,120 @@
+[gd_scene load_steps=20 format=3 uid="uid://dsox8napsmt60"]
+
+[ext_resource type="Texture2D" uid="uid://jq830u4qefwr" path="res://assets/textures/beer_idle_1.png" id="1_dwm85"]
+[ext_resource type="Script" path="res://Player.gd" id="1_edpew"]
+[ext_resource type="Texture2D" uid="uid://bjt4nl1ivbq8e" path="res://assets/textures/beer_aim_1.png" id="2_xcguh"]
+[ext_resource type="Texture2D" uid="uid://bhne6cyfcibwx" path="res://assets/textures/gravity_gun_1.png" id="3_bd8s7"]
+[ext_resource type="Texture2D" uid="uid://b38uq4fjwyo4e" path="res://assets/textures/beer_aim_2.png" id="3_ftiqj"]
+[ext_resource type="Texture2D" uid="uid://bjkts80b6ecxo" path="res://assets/textures/gravity_gun_2.png" id="4_x1kva"]
+[ext_resource type="Texture2D" uid="uid://d3icog5fogy4" path="res://assets/textures/beer_aim_3.png" id="4_yxyu4"]
+[ext_resource type="Texture2D" uid="uid://7bjtc2dtigwm" path="res://assets/textures/beer_aim_4.png" id="5_wqf86"]
+[ext_resource type="Texture2D" uid="uid://ctlox6h441k4l" path="res://assets/textures/gravity_gun_3.png" id="5_ya8y6"]
+[ext_resource type="Texture2D" uid="uid://281kjaova8xe" path="res://assets/textures/beer_flying_1.png" id="6_cnppa"]
+[ext_resource type="Texture2D" uid="uid://dxftkgh7hj51m" path="res://assets/textures/beer_flying_2.png" id="7_ht4g0"]
+[ext_resource type="Texture2D" uid="uid://dyhwo5htflt32" path="res://assets/textures/beer_flying_3.png" id="8_a3sua"]
+[ext_resource type="Texture2D" uid="uid://j2bb34digfjf" path="res://assets/textures/beer_flying_4.png" id="9_0m5sq"]
+[ext_resource type="Texture2D" uid="uid://dkgstfcwv1di6" path="res://assets/textures/beer_idle_2.png" id="11_c778w"]
+[ext_resource type="Texture2D" uid="uid://c1qlumen7owln" path="res://assets/textures/beer_idle_3.png" id="12_2ilhd"]
+[ext_resource type="Texture2D" uid="uid://bwoe0w2j1b74c" path="res://assets/textures/beer_idle_4.png" id="13_73lr6"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_qvdnb"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_xcguh")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_ftiqj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_yxyu4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_wqf86")
+}],
+"loop": true,
+"name": &"aim",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("6_cnppa")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_ht4g0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_a3sua")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_0m5sq")
+}],
+"loop": true,
+"name": &"fly",
+"speed": 15.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_dwm85")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_c778w")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_2ilhd")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_73lr6")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 10.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_y42qb"]
+size = Vector2(12.5, 23)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_nceug"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_bd8s7")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_x1kva")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_ya8y6")
+}],
+"loop": true,
+"name": &"gun",
+"speed": 10.0
+}]
+
+[node name="Player" type="Node2D"]
+script = ExtResource("1_edpew")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+sprite_frames = SubResource("SpriteFrames_qvdnb")
+animation = &"idle"
+frame_progress = 0.459087
+
+[node name="Area2D" type="Area2D" parent="."]
+metadata/_edit_lock_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(3, -2)
+shape = SubResource("RectangleShape2D_y42qb")
+metadata/_edit_lock_ = true
+
+[node name="Gun" type="Node2D" parent="."]
+metadata/_edit_lock_ = true
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Gun"]
+texture_filter = 1
+position = Vector2(22, 1)
+sprite_frames = SubResource("SpriteFrames_nceug")
+animation = &"gun"
+
+[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
